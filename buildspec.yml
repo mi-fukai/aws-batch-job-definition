@@ -20,7 +20,8 @@ phases:
   build:
     commands:
       ## Dockerイメージのビルド
-      - docker build -t fukai-test-dev-test-app-ecr-repo:$IMAGE_TAG .
+      - docker build -t test-app:$IMAGE_TAG .
+      - docker tag test-app:$IMAGE_TAG 720170942685.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/fukai-test-dev-test-app-ecr-repo/test-app:$IMAGE_TAG
 
       ## DockerイメージのECRへのプッシュ
       - docker push fukai-test-dev-test-app-ecr-repo:$IMAGE_TAG
