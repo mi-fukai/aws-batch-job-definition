@@ -3,7 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-west-2:720170942685:task-definition/fukai-test-dev-test-app-ecs-task:2"
+        TaskDefinition: "<TASK_DEFINITION>"
         LoadBalancerInfo:
           ContainerName: "test-app"
           ContainerPort: 80
