@@ -13,14 +13,14 @@ phases:
     commands:
       ## ECRにログイン
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 720170942685.dkr.ecr.us-west-2.amazonaws.com
       ## Dockerイメージのタグとして使用するため、Gitのコミットハッシュを取得
       - IMAGE_TAG=$(echo ${CODEBUILD_RESOLVED_SOURCE_VERSION} | head -c 7)
 
   build:
     commands:
       ## Dockerイメージのビルド
-      - docker build -t $IMAGE_REPOSITORY_NAME:$IMAGE_TAG .
+      - docker build -t fukai-test-dev-test-app-ecr-repo:$IMAGE_TAG .
 
       ## DockerイメージのECRへのプッシュ
-      - docker push $IMAGE_REPOSITORY_NAME:$IMAGE_TAG
+      - docker push fukai-test-dev-test-app-ecr-repo:$IMAGE_TAG
