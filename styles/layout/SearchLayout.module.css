@@ -1,0 +1,22 @@
+.parent {
+  display: flex;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 10px;
+}
+
+.searchCard {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.contentCard {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}

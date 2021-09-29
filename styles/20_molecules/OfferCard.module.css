@@ -1,0 +1,15 @@
+.card {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.content {
+}

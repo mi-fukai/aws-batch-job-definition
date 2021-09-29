@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snap Shot test Component Global Snap Shot 1`] = `
+<DocumentFragment>
+  <div
+    class="content"
+  >
+    <a
+      href="/"
+    >
+      <h1
+        class="title"
+      >
+        Elasticてすと
+      </h1>
+    </a>
+    <p>
+      きーわーどを入力して検索すると、Feedの全要素から一致する文字列があるか検索します
+    </p>
+  </div>
+</DocumentFragment>
+`;

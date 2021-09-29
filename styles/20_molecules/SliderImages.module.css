@@ -1,0 +1,9 @@
+.slider {
+  margin-top: 10px;
+  width: 60%;
+}
+
+.mainImage {
+  width: 100%;
+  display: flex;
+}
