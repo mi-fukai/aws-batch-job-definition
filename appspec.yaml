@@ -1,0 +1,17 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:us-west-2:720170942685:task-definition/fukai-test-dev-test-app-ecs-task:2"
+        LoadBalancerInfo:
+          ContainerName: "test-app"
+          ContainerPort: 80
+        NetworkConfiguration:
+          AwsvpcConfiguration:
+            Subnets:
+              - subnet-090fc77cd2ccf2a4a
+              - subnet-06e37b5118ebf2da6
+            SecurityGroups:
+              - sg-06d036a5f9f4d3cbb
+            AssignPublicIp: "ENABLED"
