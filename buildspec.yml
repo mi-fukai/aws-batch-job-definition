@@ -25,10 +25,15 @@ phases:
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       ## イメージのタグ付け
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+
+  post_build:
+    commands:
       ## DockerイメージのECRへのプッシュ
+      - echo Build completed on `date`
+      - echo Pushing the Docker image....
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
-      - printf '{"Version":"1.0","ImageURI":"%s"}' $REPOSITORY_URI:$IMAGE_TAG > imageDetail.json
 
 artifacts:
-    files:
-        - imageDetail.json
+  files:
+    - taskdef.json
+    - appspec.yaml
