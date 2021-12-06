@@ -1,0 +1,46 @@
+{
+    "jobDefinitionName": "hrjoboffer-dev",
+    "type": "container",
+    "parameters": {},
+    "containerProperties": {
+        "image": "720170942685.dkr.ecr.us-west-2.amazonaws.com/fukai-test-ecr:latest",
+        "command": [
+            "echo",
+            "'hello world'"
+        ],
+        "executionRoleArn": "",
+        "volumes": [],
+        "environment": [],
+        "readonlyRootFilesystem": true,
+        "privileged": true,
+        "ulimits": [],
+        "resourceRequirements": [
+            {
+                "value": "1",
+                "type": "VCPU"
+            },
+            {
+                "value": "2048",
+                "type": "MEMORY"
+            }
+        ],
+        "linuxParameters": {
+            "devices": [],
+            "tmpfs": []
+        },
+        "logConfiguration": {},
+        "secrets": [],
+        "networkConfiguration": {
+            "assignPublicIp": "ENABLED"
+        },
+        "fargatePlatformConfiguration": {
+            "platformVersion": "1.4.0"
+        }
+    },
+    "retryStrategy": {},
+    "propagateTags": false,
+    "tags": {},
+    "platformCapabilities": [
+        "FARGATE"
+    ]
+}
