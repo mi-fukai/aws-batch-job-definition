@@ -63,4 +63,4 @@ jobs:
       - name: Deploy AWS Batch job definition
         id: deploy-job-def
         run: |
-          aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION
+          aws batch register-job-definition --cli-input-json file:///$BATCH_JOB_DEFINITION
