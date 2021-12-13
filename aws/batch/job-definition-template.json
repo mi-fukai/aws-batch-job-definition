@@ -3,7 +3,7 @@
     "type": "container",
     "parameters": {},
     "containerProperties": {
-        "image": "720170942685.dkr.ecr.us-west-2.amazonaws.com/fukai-test-ecr:latest",
+        "image": "416363731043.dkr.ecr.ap-northeast-1.amazonaws.com/hrjoboffer-dev-test:latest",
         "command": [
             "echo",
             "'hello world'"

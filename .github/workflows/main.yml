@@ -44,7 +44,7 @@ jobs:
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: hrjoboffer-dev-joboffer-app-ecr-repo
+          ECR_REPOSITORY: hrjoboffer-dev-test
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -f ./Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
