@@ -59,7 +59,5 @@ jobs:
           BATCH_JOB_DEFINITION: job-definition.json
         working-directory: ./aws/batch
         run: |
-          pwd
           sed -e "s#__image__#$IMAGE#" $BATCH_JOB_DEFINITION_TEMPLATE > $BATCH_JOB_DEFINITION
-          cat $BATCH_JOB_DEFINITION
           aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION 
