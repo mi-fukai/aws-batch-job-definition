@@ -61,3 +61,52 @@ jobs:
         run: |
           sed -e "s#__image__#$IMAGE#" $BATCH_JOB_DEFINITION_TEMPLATE > $BATCH_JOB_DEFINITION
           aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION 
+
+  deploy_stg:
+    name: deploy_dev
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/stg'
+    timeout-minutes: 10
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - run: sleep 5 # there's still a race condition for now
+
+      - name: Configure AWS Credentials
+        run: |
+          echo AWS_WEB_IDENTITY_TOKEN_FILE=$AWS_WEB_IDENTITY_TOKEN_FILE >> $GITHUB_ENV
+          echo AWS_ROLE_ARN=${{ secrets.STG_AWS_ROLE_ARN }} >> $GITHUB_ENV
+          echo AWS_DEFAULT_REGION=${{ secrets.STG_AWS_REGION }} >> $GITHUB_ENV
+          echo AWS_REGION=${{ secrets.STG_AWS_REGION }} >> $GITHUB_ENV
+
+          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | jq -r '.value' > $AWS_WEB_IDENTITY_TOKEN_FILE
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Docker build and push
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: hrjoboffer-dev-test
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -f ./Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Fill in the new image ID in the AWS Batch job definition and deploy job definition
+        id: task-def
+        env:
+          IMAGE: ${{ steps.build-image.outputs.image }}
+          BATCH_JOB_DEFINITION_TEMPLATE: job-definition-template.json
+          BATCH_JOB_DEFINITION: job-definition.json
+        working-directory: ./aws/batch
+        run: |
+          sed -e "s#__image__#$IMAGE#" $BATCH_JOB_DEFINITION_TEMPLATE > $BATCH_JOB_DEFINITION
+          aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION 
