@@ -58,13 +58,14 @@ jobs:
           BATCH_JOB_DEFINITION_TEMPLATE: job-definition-template.json
           BATCH_JOB_DEFINITION: job-definition.json
         run: |
+          working-directory: ./aws/batch
           sed -e "s#__image__#$IMAGE#" $BATCH_JOB_DEFINITION_TEMPLATE > $BATCH_JOB_DEFINITION
-#        working-directory: ./aws/batch
 
       - name: Deploy AWS Batch job definition
         id: deploy-job-def
-#        run: |
-#          aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION
         run: |
-          aws batch register-job-definition --cli-input-json file://job-definition.json
+          working-directory: ./aws/batch
+          aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION
+#        run: |
+#          aws batch register-job-definition --cli-input-json file://job-definition.json
 #        working-directory: ./aws/batch
