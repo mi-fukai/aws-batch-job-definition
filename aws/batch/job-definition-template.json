@@ -3,7 +3,7 @@
     "type": "container",
     "parameters": {},
     "containerProperties": {
-        "image": "416363731043.dkr.ecr.ap-northeast-1.amazonaws.com/hrjoboffer-dev-test:latest",
+        "image": "__image__",
         "command": [
             "echo",
             "'hello world'"
