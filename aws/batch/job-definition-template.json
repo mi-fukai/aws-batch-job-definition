@@ -28,7 +28,14 @@
             "devices": [],
             "tmpfs": []
         },
-        "logConfiguration": {},
+        "logConfiguration": {
+            "LogDriver": "awslogs",
+            "options": {
+                "awslogs-group": "hrjoboffer-dev",
+                "awslogs-region": "ap-northeast-1",
+                "awslogs-stream-prefix": "joboffer-collector"
+            }
+        },
         "secrets": [],
         "networkConfiguration": {
             "assignPublicIp": "ENABLED"
