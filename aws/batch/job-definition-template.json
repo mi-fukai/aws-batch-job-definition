@@ -29,7 +29,7 @@
             "tmpfs": []
         },
         "logConfiguration": {
-            "LogDriver": "awslogs",
+            "logDriver": "awslogs",
             "options": {
                 "awslogs-group": "hrjoboffer-dev",
                 "awslogs-region": "ap-northeast-1",
