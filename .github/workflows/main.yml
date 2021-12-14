@@ -51,16 +51,13 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-      - name: Fill in the new image ID in the AWS Batch job definition
+      - name: Fill in the new image ID in the AWS Batch job definition and deploy job definition
         id: task-def
         env:
           IMAGE: ${{ steps.build-image.outputs.image }}
-          BATCH_JOB_DEFINITION_TEMPLATE: aws/batch/job-definition-template.json
+          BATCH_JOB_DEFINITION_TEMPLATE: job-definition-template.json
           BATCH_JOB_DEFINITION: job-definition.json
         run: |
+          working-directory: ./aws/batch
           sed -e "s#__image__#$IMAGE#" $BATCH_JOB_DEFINITION_TEMPLATE > $BATCH_JOB_DEFINITION
-
-      - name: Deploy AWS Batch job definition
-        id: deploy-job-def
-        run: |
           aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION
