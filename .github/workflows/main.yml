@@ -63,7 +63,7 @@ jobs:
           aws batch register-job-definition --cli-input-json file://$BATCH_JOB_DEFINITION 
 
   deploy_stg:
-    name: deploy_dev
+    name: deploy_stg
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/stg'
     timeout-minutes: 10
