@@ -8,7 +8,7 @@
             "echo",
             "'hello world'"
         ],
-        "executionRoleArn": "",
+        "executionRoleArn": "arn:aws:iam::416363731043:role/hrjoboffer-dev-role-for-github-actions-collector",
         "volumes": [],
         "environment": [],
         "readonlyRootFilesystem": true,
