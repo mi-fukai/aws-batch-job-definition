@@ -44,7 +44,9 @@
             "platformVersion": "1.4.0"
         }
     },
-    "retryStrategy": {},
+    "retryStrategy": {
+        "attempts": 1
+    },
     "propagateTags": false,
     "tags": {},
     "platformCapabilities": [
