@@ -1,0 +1,55 @@
+{
+    "jobDefinitionName": "hrjoboffer-dev",
+    "type": "container",
+    "parameters": {},
+    "containerProperties": {
+        "image": "__image__",
+        "command": [
+            "echo",
+            "'hello world'"
+        ],
+        "executionRoleArn": "arn:aws:iam::416363731043:role/hrjoboffer-dev-role-for-github-actions-collector",
+        "volumes": [],
+        "environment": [],
+        "readonlyRootFilesystem": true,
+        "privileged": false,
+        "ulimits": [],
+        "resourceRequirements": [
+            {
+                "value": "1",
+                "type": "VCPU"
+            },
+            {
+                "value": "2048",
+                "type": "MEMORY"
+            }
+        ],
+        "linuxParameters": {
+            "devices": [],
+            "tmpfs": []
+        },
+        "logConfiguration": {
+            "logDriver": "awslogs",
+            "options": {
+                "awslogs-group": "hrjoboffer-dev",
+                "awslogs-region": "ap-northeast-1",
+                "awslogs-stream-prefix": "joboffer-collector"
+            }
+        },
+        "secrets": [],
+        "networkConfiguration": {
+            "assignPublicIp": "ENABLED"
+        },
+        "fargatePlatformConfiguration": {
+            "platformVersion": "1.4.0"
+        }
+    },
+    "retryStrategy": {
+        "attempts": 1
+    },
+    "propagateTags": false,
+    "tags": {},
+    "platformCapabilities": [
+        "FARGATE"
+    ]
+}
