@@ -12,7 +12,7 @@
         "volumes": [],
         "environment": [],
         "readonlyRootFilesystem": true,
-        "privileged": true,
+        "privileged": false,
         "ulimits": [],
         "resourceRequirements": [
             {
